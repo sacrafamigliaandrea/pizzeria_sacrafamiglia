@@ -1,0 +1,5 @@
+# Config locale dell'ambiente di sviluppo
+.claude/
+
+# File di sistema
+.DS_Store

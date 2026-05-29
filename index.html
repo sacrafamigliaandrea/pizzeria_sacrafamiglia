@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizzeria SacraFamiglia</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Definizioni SVG condivise (texture ingredienti). -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="impasto" cx="50%" cy="45%" r="60%">
+        <stop offset="0%" stop-color="#f6d186" />
+        <stop offset="70%" stop-color="#e8b860" />
+        <stop offset="100%" stop-color="#c98b3b" />
+      </radialGradient>
+
+      <pattern id="texture-mozzarella" patternUnits="userSpaceOnUse" width="24" height="24">
+        <rect width="24" height="24" fill="#f6edd2" opacity="0.5" />
+        <ellipse cx="8" cy="8" rx="6" ry="5" fill="#fffdf5" />
+        <ellipse cx="18" cy="17" rx="5" ry="4" fill="#fdf8ea" />
+      </pattern>
+      <pattern id="texture-prosciutto" patternUnits="userSpaceOnUse" width="24" height="24">
+        <rect width="24" height="24" fill="#e8959a" opacity="0.55" />
+        <ellipse cx="12" cy="13" rx="11" ry="6" fill="#dd6f78" opacity="0.75" />
+        <path d="M0,6 Q12,2 24,7" stroke="#ffffff" stroke-width="1.6" fill="none" opacity="0.7" />
+        <path d="M0,18 Q12,15 24,19" stroke="#fff3f3" stroke-width="1.6" fill="none" opacity="0.6" />
+      </pattern>
+      <pattern id="texture-gorgonzola" patternUnits="userSpaceOnUse" width="24" height="24">
+        <rect width="24" height="24" fill="#f1ecd8" opacity="0.75" />
+        <circle cx="6" cy="7" r="2" fill="#5d7f86" />
+        <circle cx="15" cy="5" r="1.5" fill="#46656b" />
+        <circle cx="19" cy="15" r="2" fill="#5d7f86" />
+        <circle cx="9" cy="17" r="1.5" fill="#46656b" />
+        <circle cx="13" cy="12" r="1" fill="#6d8f96" />
+      </pattern>
+      <pattern id="texture-salamino" patternUnits="userSpaceOnUse" width="24" height="24">
+        <rect width="24" height="24" fill="#b83227" opacity="0.32" />
+        <circle cx="7" cy="8" r="4.5" fill="#9c2a20" />
+        <circle cx="17" cy="16" r="4.5" fill="#8f2a20" />
+        <circle cx="18" cy="6" r="2.6" fill="#a83228" />
+        <circle cx="6" cy="18" r="2.6" fill="#a83228" />
+        <circle cx="6" cy="7" r="0.8" fill="#e8c9b0" />
+        <circle cx="8" cy="9" r="0.7" fill="#e8c9b0" />
+        <circle cx="16" cy="15" r="0.8" fill="#e8c9b0" />
+        <circle cx="18" cy="17" r="0.7" fill="#e8c9b0" />
+      </pattern>
+      <pattern id="texture-bufala" patternUnits="userSpaceOnUse" width="24" height="24">
+        <rect width="24" height="24" fill="#eaf0ee" opacity="0.45" />
+        <circle cx="9" cy="9" r="6" fill="#ffffff" stroke="#dde7e5" stroke-width="0.9" />
+        <circle cx="18" cy="18" r="5" fill="#fbfdfd" stroke="#dde7e5" stroke-width="0.9" />
+      </pattern>
+      <pattern id="texture-patatine" patternUnits="userSpaceOnUse" width="24" height="24">
+        <rect width="24" height="24" fill="#f3cf7a" opacity="0.3" />
+        <rect x="2" y="6" width="16" height="3.4" rx="1.6" fill="#e8b34d" transform="rotate(18 12 12)" />
+        <rect x="4" y="12" width="16" height="3.4" rx="1.6" fill="#f0c562" transform="rotate(-12 12 12)" />
+        <rect x="2" y="2" width="14" height="3.2" rx="1.6" fill="#dca63f" transform="rotate(52 12 12)" />
+      </pattern>
+      <pattern id="texture-wurstel" patternUnits="userSpaceOnUse" width="24" height="24">
+        <rect width="24" height="24" fill="#e7b9a6" opacity="0.35" />
+        <ellipse cx="8" cy="9" rx="6" ry="4" fill="#d98c79" stroke="#c87a67" stroke-width="0.9" />
+        <ellipse cx="17" cy="17" rx="5.5" ry="3.6" fill="#dd9482" stroke="#c87a67" stroke-width="0.9" />
+      </pattern>
+    </defs>
+  </svg>
+
+  <header class="topbar">
+    <h1>🍕 Pizzeria SacraFamiglia</h1>
+    <div class="cassa">
+      <span>🍕 Servite: <strong id="cassa-pizze">0</strong></span>
+      <span>💶 Incasso: <strong id="cassa-incasso">€ 0,00</strong></span>
+    </div>
+  </header>
+
+  <main id="palco">
+    <!-- FASE 1: TELEFONATA -->
+    <section class="fase" id="fase-telefonata">
+      <div class="telefono squillo">📞</div>
+      <p class="grande-testo">Il telefono squilla...</p>
+      <button id="btn-rispondi" class="azione">Rispondi alla chiamata</button>
+    </section>
+
+    <!-- FASE 2: COMANDA -->
+    <section class="fase nascosta" id="fase-comanda">
+      <div class="fumetto" id="fumetto-cliente"></div>
+      <div class="comanda" id="comanda-foglio"></div>
+      <button id="btn-prepara" class="azione">Vai a preparare 👨‍🍳</button>
+    </section>
+
+    <!-- FASE 3: PREPARAZIONE -->
+    <section class="fase nascosta" id="fase-preparazione">
+      <h2 class="intestazione-prep" id="intestazione-prep"></h2>
+      <div class="banco">
+        <div class="zona-pizza">
+          <svg id="pizza" viewBox="0 0 440 440" role="img" aria-label="Pizza da preparare">
+            <g id="base"></g>
+            <g id="spicchi"></g>
+            <g id="tagli"></g>
+          </svg>
+        </div>
+
+        <aside class="pannello">
+          <div class="comanda mini" id="comanda-appesa"></div>
+
+          <div class="gruppo">
+            <h2>1. Taglia la pizza in...</h2>
+            <div id="divisori" class="bottoni"></div>
+          </div>
+
+          <div class="gruppo">
+            <h2>2. Metti gli ingredienti</h2>
+            <p class="aiuto">Scegli un ingrediente, poi clicca gli spicchi (riclicca per togliere).</p>
+            <div id="ingredienti" class="bottoni"></div>
+          </div>
+
+          <div class="gruppo">
+            <h2>La tua pizza</h2>
+            <ul id="riepilogo"></ul>
+          </div>
+
+          <button id="btn-verifica" class="azione">Pizza pronta! 🔔</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FASE 4 + 5: SCONTRINO E CONSEGNA -->
+    <section class="fase nascosta" id="fase-scontrino">
+      <div id="esito" class="esito"></div>
+      <div class="scontrino nascosta" id="scontrino"></div>
+      <div class="bottoni-esito" id="bottoni-esito"></div>
+    </section>
+  </main>
+
+  <script src="sound.js"></script>
+  <script src="pizza.js"></script>
+</body>
+</html>

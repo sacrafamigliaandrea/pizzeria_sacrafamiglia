@@ -1,0 +1,224 @@
+:root {
+  --rosso: #c0392b;
+  --rosso-scuro: #962d22;
+  --crema: #fff7e6;
+  --legno: #6b3f1d;
+  --verde: #2e7d32;
+  --ombra: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  background: repeating-linear-gradient(45deg, #f3e3c3, #f3e3c3 22px, #efdcb6 22px, #efdcb6 44px);
+  color: #2c2018;
+}
+
+.nascosta { display: none !important; }
+
+/* ---- Barra superiore + cassa ---- */
+.topbar {
+  background: var(--rosso);
+  color: var(--crema);
+  padding: 14px 28px;
+  box-shadow: var(--ombra);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.topbar h1 { margin: 0; font-size: 1.7rem; }
+.cassa { display: flex; gap: 22px; font-size: 1.05rem; }
+.cassa strong { font-size: 1.2rem; }
+
+/* ---- Fasi ---- */
+#palco { padding: 28px; }
+.fase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: entra 0.25s ease;
+}
+@keyframes entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.grande-testo { font-size: 1.4rem; margin: 0; }
+
+.telefono { font-size: 5rem; }
+.squillo { animation: squilla 0.6s ease-in-out infinite; }
+@keyframes squilla {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-14deg); }
+  75% { transform: rotate(14deg); }
+}
+
+/* ---- Pulsanti ---- */
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 2px solid var(--rosso);
+  background: #fff;
+  color: var(--rosso-scuro);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: transform 0.08s ease, background 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+}
+button:hover { transform: translateY(-2px); }
+button.attivo { background: var(--rosso); color: var(--crema); }
+
+.azione {
+  background: var(--verde);
+  border-color: var(--verde);
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 14px 26px;
+  border-radius: 14px;
+}
+.azione.secondaria { background: var(--rosso); border-color: var(--rosso); }
+
+.bottoni { display: flex; flex-wrap: wrap; gap: 10px; }
+.bottoni-esito { display: flex; gap: 12px; }
+
+/* ---- Fumetto della telefonata ---- */
+.fumetto {
+  background: #fff;
+  border: 2px solid var(--rosso);
+  border-radius: 18px;
+  padding: 18px 22px;
+  max-width: 560px;
+  font-size: 1.25rem;
+  position: relative;
+  box-shadow: var(--ombra);
+}
+.fumetto .chi { display: block; font-weight: bold; color: var(--rosso-scuro); margin-bottom: 6px; }
+.fumetto::after {
+  content: "";
+  position: absolute;
+  left: 40px; bottom: -14px;
+  border: 14px solid transparent;
+  border-top-color: #fff;
+  border-bottom: 0;
+}
+
+/* ---- Comanda (foglietto) ---- */
+.comanda {
+  background: #fffdf5;
+  border: 1px dashed #c9a35e;
+  border-radius: 8px;
+  padding: 14px 18px;
+  min-width: 280px;
+  box-shadow: var(--ombra);
+}
+.comanda.mini { box-shadow: none; margin-bottom: 18px; background: #fbf3df; }
+.comanda-intestazione, .comanda-appesa .comanda-intestazione {
+  font-weight: bold;
+  color: var(--rosso-scuro);
+  margin-bottom: 8px;
+}
+.comanda ul { list-style: none; margin: 0; padding: 0; }
+.comanda li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 1.1rem;
+  border-bottom: 1px dotted #e0cda0;
+}
+
+/* ---- Comanda: blocchi multi-pizza ---- */
+.pizza-blocco { margin-top: 10px; }
+.pizza-titolo { font-weight: bold; color: var(--legno); margin: 8px 0 2px; }
+
+/* ---- Banco di preparazione ---- */
+.intestazione-prep {
+  width: 100%;
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+  color: var(--rosso-scuro);
+  text-align: center;
+}
+.banco { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; width: 100%; }
+.zona-pizza { background: var(--legno); border-radius: 18px; padding: 20px; box-shadow: var(--ombra); }
+#pizza {
+  width: min(46vw, 440px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+}
+.spicchio { cursor: pointer; transition: opacity 0.12s ease; }
+.spicchio:hover { opacity: 0.82; }
+.linea-taglio {
+  stroke: rgba(120, 70, 20, 0.55);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+  pointer-events: none;
+}
+
+.pannello {
+  flex: 1 1 320px;
+  min-width: 300px;
+  background: var(--crema);
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: var(--ombra);
+}
+.gruppo { margin-bottom: 20px; }
+.gruppo h2 { margin: 0 0 10px; font-size: 1.1rem; color: var(--rosso-scuro); }
+.aiuto { margin: 0 0 10px; font-size: 0.9rem; color: #6b5a48; }
+
+#riepilogo { list-style: none; margin: 0 0 18px; padding: 0; }
+#riepilogo li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  font-size: 1.05rem;
+  border-bottom: 1px dashed #d8c4a0;
+}
+#riepilogo .vuota { color: #8a7a64; }
+
+.frazione {
+  margin-left: auto;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--rosso-scuro);
+}
+
+.swatch { width: 24px; height: 24px; vertical-align: middle; flex: 0 0 auto; }
+button .swatch { margin-right: 7px; }
+
+/* ---- Esito + scontrino ---- */
+.esito {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+  max-width: 560px;
+  padding: 16px 22px;
+  border-radius: 14px;
+}
+.esito.ok { background: #e6f4e6; color: var(--verde); border: 2px solid var(--verde); }
+.esito.ko { background: #fdecea; color: var(--rosso-scuro); border: 2px solid var(--rosso); }
+.esito ul { text-align: left; font-size: 1.05rem; font-weight: normal; margin: 12px 0 0; }
+.esito li { margin: 6px 0; }
+
+.scontrino {
+  background: #fff;
+  width: 280px;
+  padding: 18px 22px;
+  font-family: "Courier New", monospace;
+  box-shadow: var(--ombra);
+  border-radius: 4px;
+}
+.sc-testata { text-align: center; font-weight: bold; letter-spacing: 1px; }
+.sc-sub { text-align: center; font-size: 0.9rem; margin-top: 4px; }
+.scontrino hr { border: none; border-top: 1px dashed #999; margin: 10px 0; }
+.sc-pizza { font-weight: bold; margin: 6px 0 2px; }
+.riga-sc { display: flex; justify-content: space-between; padding: 3px 0; }
+.riga-sc.totale { font-weight: bold; font-size: 1.1rem; }
+.sc-grazie { text-align: center; margin-top: 12px; font-size: 0.9rem; }
