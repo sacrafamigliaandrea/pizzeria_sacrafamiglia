@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pizzeria SacraFamiglia</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
   <!-- Definizioni SVG condivise (texture ingredienti). -->
@@ -65,11 +65,46 @@
     </defs>
   </svg>
 
+  <!-- HOME: schermata iniziale con la foto della pizzeria -->
+  <div id="home">
+    <div class="home-overlay">
+      <div class="home-card">
+        <h1 class="home-titolo">Pizzeria SacraFamiglia</h1>
+        <p class="home-tagline">Diventa il pizzaiolo e impara le frazioni<br />preparando le pizze dei clienti! 🍕</p>
+        <button id="btn-entra" class="azione grande-azione">▶ Entra nella pizzeria</button>
+        <button id="btn-salta-intro" class="link-salta">Salta l'introduzione →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO: video di benvenuto -->
+  <div id="intro" class="nascosta">
+    <video id="intro-video" playsinline preload="auto">
+      <source src="frazioni.mp4" type="video/mp4" />
+    </video>
+    <button id="btn-salta" class="btn-salta nascosta">Salta ⏭</button>
+  </div>
+
+  <!-- STACCO: schermo di passaggio prima di iniziare a lavorare -->
+  <div id="stacco" class="nascosta">
+    <div class="stacco-overlay">
+      <div class="stacco-card">
+        <h2 class="stacco-titolo">Pronti ad aprire! 🍕</h2>
+        <p class="stacco-testo">Scegli come vuoi lavorare oggi:</p>
+        <div class="stacco-bottoni">
+          <button id="btn-livello1" class="azione grande-azione">📞 Livello 1 — Pizze al telefono</button>
+          <button id="btn-livello2" class="azione grande-azione">🍽️ Livello 2 — Servizio al tavolo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header class="topbar">
     <h1>🍕 Pizzeria SacraFamiglia</h1>
     <div class="cassa">
       <span>🍕 Servite: <strong id="cassa-pizze">0</strong></span>
       <span>💶 Incasso: <strong id="cassa-incasso">€ 0,00</strong></span>
+      <button id="btn-musica" class="btn-musica" aria-pressed="false">🎵 Musica: OFF</button>
     </div>
   </header>
 
@@ -84,8 +119,25 @@
     <!-- FASE 2: COMANDA -->
     <section class="fase nascosta" id="fase-comanda">
       <div class="fumetto" id="fumetto-cliente"></div>
+      <button id="btn-rileggi" class="btn-rileggi">🔊 Riascolta la comanda</button>
       <div class="comanda" id="comanda-foglio"></div>
       <button id="btn-prepara" class="azione">Vai a preparare 👨‍🍳</button>
+    </section>
+
+    <!-- LIVELLO 2 — FASE A: IL CAMERIERE PORTA L'ORDINE DEL TAVOLO -->
+    <section class="fase nascosta" id="fase-tavolo">
+      <div class="fumetto" id="fumetto-cameriere"></div>
+      <button id="btn-rileggi-tavolo" class="btn-rileggi">🔊 Riascolta l'ordine</button>
+      <div class="comanda" id="tavolo-foglio"></div>
+      <button id="btn-calcola" class="azione">Organizzati per servire 🧮</button>
+    </section>
+
+    <!-- LIVELLO 2 — FASE B: CALCOLO (domande a scelta multipla) -->
+    <section class="fase nascosta" id="fase-calcolo">
+      <h2 class="intestazione-prep">Organizzati: quante pizze e come tagliarle</h2>
+      <div class="comanda mini" id="calcolo-tavolo"></div>
+      <div id="calcolo-domande" class="calcolo-domande"></div>
+      <button id="btn-prepara-tavolo" class="azione nascosta">Vai a preparare 👨‍🍳</button>
     </section>
 
     <!-- FASE 3: PREPARAZIONE -->
@@ -101,6 +153,7 @@
         </div>
 
         <aside class="pannello">
+          <div id="nav-pizze" class="nav-pizze nascosta"></div>
           <div class="comanda mini" id="comanda-appesa"></div>
 
           <div class="gruppo">
@@ -132,7 +185,10 @@
     </section>
   </main>
 
-  <script src="sound.js"></script>
-  <script src="pizza.js"></script>
+  <!-- Player YouTube nascosto: musica di sottofondo comandata dal pulsante 🎵 -->
+  <div id="yt-musica" aria-hidden="true"></div>
+
+  <script src="sound.js?v=8"></script>
+  <script src="pizza.js?v=8"></script>
 </body>
 </html>

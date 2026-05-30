@@ -18,6 +18,174 @@ body {
 
 .nascosta { display: none !important; }
 
+/* ---- Home (foto della pizzeria) ---- */
+#home {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: url("pizzeria.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+}
+#home.via { opacity: 0; }
+.home-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(circle at center, rgba(28, 16, 9, 0.35), rgba(28, 16, 9, 0.78));
+}
+.home-card {
+  text-align: center;
+  color: var(--crema);
+  max-width: 620px;
+  padding: 38px 42px;
+  background: rgba(40, 22, 12, 0.55);
+  border: 2px solid rgba(255, 247, 230, 0.35);
+  border-radius: 22px;
+  backdrop-filter: blur(3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+.home-titolo {
+  margin: 0 0 14px;
+  font-size: 3rem;
+  line-height: 1.1;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+}
+.home-tagline {
+  margin: 0 0 30px;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+.grande-azione {
+  font-size: 1.45rem;
+  padding: 18px 34px;
+}
+.link-salta {
+  display: block;
+  margin: 18px auto 0;
+  background: transparent;
+  border: none;
+  color: var(--crema);
+  font-size: 1rem;
+  text-decoration: underline;
+  opacity: 0.9;
+}
+.link-salta:hover { opacity: 1; }
+
+/* ---- Stacco (passaggio prima del lavoro) ---- */
+#stacco {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: url("pizze.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+}
+#stacco.via { opacity: 0; }
+.stacco-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(circle at center, rgba(28, 16, 9, 0.3), rgba(28, 16, 9, 0.78));
+}
+.stacco-card {
+  text-align: center;
+  color: var(--crema);
+  max-width: 620px;
+  padding: 34px 42px;
+  background: rgba(40, 22, 12, 0.6);
+  border: 2px solid rgba(255, 247, 230, 0.35);
+  border-radius: 22px;
+  backdrop-filter: blur(3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+.stacco-titolo {
+  margin: 0 0 12px;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+}
+.stacco-testo {
+  margin: 0 0 26px;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+.stacco-bottoni { display: flex; flex-direction: column; gap: 14px; align-items: center; }
+
+/* ---- Livello 2: domande di calcolo ---- */
+.calcolo-domande { width: 100%; max-width: 580px; }
+.domanda {
+  background: var(--crema);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--ombra);
+}
+.domanda-testo { margin: 0 0 10px; font-weight: bold; color: var(--rosso-scuro); }
+button.giusta { background: var(--verde); border-color: var(--verde); color: #fff; }
+button.sbagliata { background: #fdecea; border-color: var(--rosso); color: var(--rosso-scuro); opacity: 0.65; }
+
+/* ---- Livello 2: navigatore delle pizze ---- */
+.nav-pizze { margin-bottom: 16px; padding: 10px 12px; background: #fbf3df; border-radius: 12px; }
+.nav-pizze-tit { font-weight: bold; color: var(--legno); margin-bottom: 6px; font-size: 0.95rem; }
+.nav-pizze-bottoni { display: flex; flex-wrap: wrap; gap: 6px; }
+.nav-pizze-bottoni button { padding: 6px 10px; font-size: 0.9rem; }
+
+/* ---- Intro video (sfondo bianco + trascrizione a destra) ---- */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  transition: opacity 0.6s ease;
+}
+#intro.via { opacity: 0; }
+#intro-video {
+  max-height: 88vh;
+  max-width: min(100%, 480px);
+  height: auto;
+  display: block;
+  background: #000;
+  border-radius: 16px;
+  box-shadow: var(--ombra);
+}
+/* Player YouTube fuori vista (ma non display:none, così l'audio va) */
+#yt-musica {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.btn-salta {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  background: #fff;
+  border-color: var(--rosso);
+  color: var(--rosso-scuro);
+  box-shadow: var(--ombra);
+}
+
 /* ---- Barra superiore + cassa ---- */
 .topbar {
   background: var(--rosso);
@@ -31,8 +199,23 @@ body {
   gap: 10px;
 }
 .topbar h1 { margin: 0; font-size: 1.7rem; }
-.cassa { display: flex; gap: 22px; font-size: 1.05rem; }
+.cassa { display: flex; align-items: center; gap: 22px; font-size: 1.05rem; }
 .cassa strong { font-size: 1.2rem; }
+.btn-musica {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--crema);
+  padding: 6px 12px;
+  font-size: 0.95rem;
+}
+.btn-musica.attivo { background: #fff; color: var(--rosso-scuro); }
+.btn-rileggi {
+  border-color: var(--rosso);
+  background: #fff;
+  color: var(--rosso-scuro);
+  font-size: 0.95rem;
+  padding: 8px 14px;
+}
 
 /* ---- Fasi ---- */
 #palco { padding: 28px; }
@@ -131,6 +314,17 @@ button.attivo { background: var(--rosso); color: var(--crema); }
   border-bottom: 1px dotted #e0cda0;
 }
 
+/* ---- Comanda al tavolo: separatore avanzamento ---- */
+.tally-sep {
+  margin: 12px 0 4px;
+  padding-top: 10px;
+  border-top: 2px solid #d8c4a0;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: var(--legno);
+}
+.tally-lista li .frazione { font-size: 1.05rem; }
+
 /* ---- Comanda: blocchi multi-pizza ---- */
 .pizza-blocco { margin-top: 10px; }
 .pizza-titolo { font-weight: bold; color: var(--legno); margin: 8px 0 2px; }
@@ -153,10 +347,17 @@ button.attivo { background: var(--rosso); color: var(--crema); }
 }
 .spicchio { cursor: pointer; transition: opacity 0.12s ease; }
 .spicchio:hover { opacity: 0.82; }
+.linea-taglio-alone {
+  stroke: rgba(35, 18, 5, 0.6);
+  stroke-width: 7;
+  stroke-linecap: round;
+  pointer-events: none;
+}
 .linea-taglio {
-  stroke: rgba(120, 70, 20, 0.55);
-  stroke-width: 2.5;
-  stroke-dasharray: 6 5;
+  stroke: #fff7e8;
+  stroke-width: 3.2;
+  stroke-dasharray: 10 7;
+  stroke-linecap: round;
   pointer-events: none;
 }
 
